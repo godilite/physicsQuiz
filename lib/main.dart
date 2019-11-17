@@ -9,24 +9,24 @@ import 'package:audioplayers/audio_cache.dart';
     I will explained that in a bit.
   */
 void main() => runApp(Phy101());
-QuizEngine quizEngine =  QuizEngine();
-class Phy101 extends StatelessWidget {
+QuizEngine quizEngine =  QuizEngine(); //here we call a class from the file quiz_engine.dart, this is called abstraction in OOP
+class Phy101 extends StatelessWidget { //this is a statelessWidget class which means that the contents here will never change once app runs
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
+      home: Scaffold( //this is a scaffold, a blank screen for the app.
         backgroundColor: Colors.blueGrey.shade900,
         body: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: PhyPage(),
+              child: PhyPage(), //here we call a stateful class which contains dynamic contents of our app
             ),
         ),
       ),
     );
   }
 }
-class PhyPage extends StatefulWidget {
+class PhyPage extends StatefulWidget { //this is a stateful widget class where we can change its contents as the state changes
   @override
   _PhyPageState createState() => _PhyPageState();
 }
@@ -34,9 +34,10 @@ class PhyPage extends StatefulWidget {
 class _PhyPageState extends State<PhyPage> {
   @override
 
-  List<Icon> scoreKeeper = [];
+  List<Icon> scoreKeeper = []; // this is how to define a variable in flutter to accept a specific data type,
+  // in this case we use a List to accept oly icons
 
-  void checkAnswer(bool userPickedAnswer){
+  void checkAnswer(bool userPickedAnswer){ //this class is called when a true/false button is clicked to confirm answers
     if(quizEngine.isFinished()==true){
       Alert(
         context: context,
@@ -58,10 +59,10 @@ class _PhyPageState extends State<PhyPage> {
       quizEngine.reset();
       scoreKeeper = [];
     }else {
-      bool correctAnswer = quizEngine.getCorrectAns();
-      setState(() {
+      bool correctAnswer = quizEngine.getCorrectAns(); //here we call the answers from da
+      setState(() { //we call the setState method to change the state of our application
         if (userPickedAnswer == correctAnswer) {
-          scoreKeeper.add(
+          scoreKeeper.add( //this add method updates the scoreKeeper array on line 59
             Icon(
               Icons.check,
               color: Colors.green,
@@ -85,7 +86,7 @@ class _PhyPageState extends State<PhyPage> {
       });
     }
   }
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { //this widget contains the UI of our app
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
