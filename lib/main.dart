@@ -33,16 +33,16 @@ class PhyPage extends StatefulWidget { //this is a stateful widget class where w
 
 class _PhyPageState extends State<PhyPage> {
   @override
-
+  int scores = 0;
   List<Icon> scoreKeeper = []; // this is how to define a variable in flutter to accept a specific data type,
-  // in this case we use a List to accept oly icons
+  // in this case we use a List to accept only icons
 
   void checkAnswer(bool userPickedAnswer){ //this class is called when a true/false button is clicked to confirm answers
     if(quizEngine.isFinished()==true){
       Alert(
         context: context,
         title: 'Finished!',
-        desc: 'You\'ve reached the end of the quiz.',
+        desc: 'You\'ve reached the end of the quiz. \n your score is $scores',
         buttons: [
           DialogButton(
             child: Text(
@@ -62,6 +62,7 @@ class _PhyPageState extends State<PhyPage> {
       bool correctAnswer = quizEngine.getCorrectAns(); //here we call the answers from da
       setState(() { //we call the setState method to change the state of our application
         if (userPickedAnswer == correctAnswer) {
+          scores++;
           scoreKeeper.add( //this add method updates the scoreKeeper array on line 59
             Icon(
               Icons.check,
@@ -78,7 +79,7 @@ class _PhyPageState extends State<PhyPage> {
               color: Colors.red,
             ),
           );
-          final player = AudioCache();
+          final player = AudioCache(); //final means this cannot be re-declared
 
           player.play('131657__bertrof__game-sound-wrong.wav');
         }
